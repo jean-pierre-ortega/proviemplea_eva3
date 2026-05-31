@@ -23,7 +23,16 @@ docker compose exec -u root app php artisan l5-swagger:generate
 La aplicación puede ejecutarse utilizando Docker Compose mediante:
 docker compose up -d
 
+Contrato OpenAPI
+
+La documentación Swagger fue generada utilizando L5-Swagger integrado en Laravel. El contrato OpenAPI generado automáticamente por la aplicación se encuentra en:
+
+storage/api-docs/api-docs.json
+
+Este archivo contiene la especificación completa de los endpoints documentados, incluyendo rutas, métodos HTTP, parámetros, respuestas, esquemas de datos y definiciones utilizadas por Swagger UI.
+
 La documentación Swagger se encuentra disponible en:
+
 http://localhost:8080/api/documentation
 
 Tecnologías utilizadas:
