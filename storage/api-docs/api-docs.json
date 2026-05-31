@@ -1,0 +1,681 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ProviEmplea API",
+        "description": "API REST para la plataforma ProviEmplea.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/api",
+            "description": "Servidor local"
+        }
+    ],
+    "paths": {
+        "/admin/contactos": {
+            "get": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Listar contactos solicitados",
+                "description": "Retorna las solicitudes de contacto con empresa y persona asociadas.",
+                "operationId": "a5f060bc7b6fa5377c1497af4ddcd2d7",
+                "responses": {
+                    "200": {
+                        "description": "Listado de contactos obtenido correctamente"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Crear contacto solicitado",
+                "description": "Registra una solicitud de contacto entre una empresa y una persona.",
+                "operationId": "5dbc342d1c62d99c382fd63d39ff2d4f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "empresa_id": 1,
+                                "persona_id": 1,
+                                "estado": "pendiente",
+                                "notas_admin": "Empresa interesada en contactar al talento"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Contacto creado correctamente"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            }
+        },
+        "/admin/contactos/{id}": {
+            "patch": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Actualizar contacto solicitado",
+                "description": "Actualiza el estado o notas de una solicitud de contacto.",
+                "operationId": "5783d5aacdc283ea7d5688d1124aa8d8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "estado": "contactado",
+                                "notas_admin": "Se realizó el primer contacto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contacto actualizado correctamente"
+                    },
+                    "404": {
+                        "description": "Contacto no encontrado"
+                    }
+                }
+            }
+        },
+        "/admin/estadisticas": {
+            "get": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Obtener estadísticas",
+                "description": "Retorna estadísticas generales de personas, empresas y contactos.",
+                "operationId": "f349a0dc217c6c919adbec452c7dde3d",
+                "responses": {
+                    "200": {
+                        "description": "Estadísticas obtenidas correctamente"
+                    }
+                }
+            }
+        },
+        "/empresas": {
+            "get": {
+                "tags": [
+                    "Empresas"
+                ],
+                "summary": "Listar empresas",
+                "description": "Retorna el listado de empresas registradas.",
+                "operationId": "22631014ece23858d19a7ef1c89f0e78",
+                "responses": {
+                    "200": {
+                        "description": "Listado de empresas obtenido correctamente"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Empresas"
+                ],
+                "summary": "Crear empresa",
+                "description": "Registra una nueva empresa.",
+                "operationId": "edd395f6abdaa55cb0284b3b198d7ad6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "nombre_empresa": "TechCorp SpA",
+                                "rut_empresa": "76123456-7",
+                                "email": "rrhh@techcorp.cl",
+                                "tipo_empresa": "contratacion-directa",
+                                "rubro": "Tecnología",
+                                "beneficios": [
+                                    "Seguro complementario",
+                                    "Trabajo remoto"
+                                ],
+                                "contacto_nombre": "Ana López",
+                                "contacto_email": "ana@techcorp.cl",
+                                "validado": false,
+                                "activo": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Empresa creada correctamente"
+                    }
+                }
+            }
+        },
+        "/empresas/{id}": {
+            "get": {
+                "tags": [
+                    "Empresas"
+                ],
+                "summary": "Obtener empresa por ID",
+                "operationId": "1ab6ccd465b58367f4064aa417a103be",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empresa encontrada"
+                    },
+                    "404": {
+                        "description": "Empresa no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Empresas"
+                ],
+                "summary": "Actualizar empresa",
+                "operationId": "b61661cfb086a49afd6ebebf15ed6011",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empresa actualizada correctamente"
+                    },
+                    "404": {
+                        "description": "Empresa no encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Empresas"
+                ],
+                "summary": "Eliminar empresa",
+                "operationId": "56b2aac859ceb472597b45436c7f5f12",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empresa eliminada correctamente"
+                    },
+                    "404": {
+                        "description": "Empresa no encontrada"
+                    }
+                }
+            }
+        },
+        "/empresas/{id}/validar": {
+            "patch": {
+                "tags": [
+                    "Empresas"
+                ],
+                "summary": "Validar empresa",
+                "operationId": "8e0e700c208ef6231bdf7ccd0bf869d5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empresa validada correctamente"
+                    },
+                    "404": {
+                        "description": "Empresa no encontrada"
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Verificar estado de la API",
+                "description": "Retorna el estado operativo de ProviEmplea API.",
+                "operationId": "63ca574ccc7f0d914cdced2f70f30b57",
+                "responses": {
+                    "200": {
+                        "description": "API funcionando correctamente"
+                    }
+                }
+            }
+        },
+        "/personas": {
+            "get": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Listar personas",
+                "description": "Retorna el listado de personas registradas en ProviEmplea.",
+                "operationId": "84e537aeba1e2d52163ea10927e98430",
+                "responses": {
+                    "200": {
+                        "description": "Listado de personas obtenido correctamente"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Crear persona",
+                "description": "Registra una nueva persona en ProviEmplea.",
+                "operationId": "9d6d475142411d09ace30132072dbeb7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "email": "talento@ejemplo.cl",
+                                "telefono": "+56912345678",
+                                "codigo_talento": "PROV002",
+                                "nivel_educacional": "Universitaria",
+                                "titulo_carrera": "Ingeniería Informática",
+                                "anio_egreso": 2024,
+                                "anios_experiencia": 1,
+                                "competencias": [
+                                    "PHP",
+                                    "Laravel"
+                                ],
+                                "areas_experiencia": [
+                                    "Backend"
+                                ],
+                                "rango_renta": "800000",
+                                "tipo_jornada": "Completa",
+                                "modalidad": "Híbrida",
+                                "cursos": [
+                                    "Laravel Básico"
+                                ],
+                                "idiomas": [
+                                    "Español"
+                                ],
+                                "persona_discapacidad": false,
+                                "validado": false,
+                                "activo": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Persona creada correctamente"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            }
+        },
+        "/personas/{id}": {
+            "get": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Obtener persona por ID",
+                "description": "Retorna una persona específica según su ID.",
+                "operationId": "bbd0a2bc22755dc3676325845d14deb2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Persona encontrada"
+                    },
+                    "404": {
+                        "description": "Persona no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Actualizar persona",
+                "description": "Actualiza los datos de una persona existente.",
+                "operationId": "a93de69e16ad096453410414ed502809",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "telefono": "+56987654321",
+                                "nivel_educacional": "Técnica",
+                                "anios_experiencia": 2,
+                                "modalidad": "Remota"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Persona actualizada correctamente"
+                    },
+                    "404": {
+                        "description": "Persona no encontrada"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Eliminar persona",
+                "description": "Elimina una persona registrada según su ID.",
+                "operationId": "42bc19ebb4f9057d921a5d3fad327b28",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Persona eliminada correctamente"
+                    },
+                    "404": {
+                        "description": "Persona no encontrada"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            }
+        },
+        "/personas/{id}/validar": {
+            "patch": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Validar persona",
+                "description": "Marca una persona como validada.",
+                "operationId": "25e6ef5f6294d18ff84fd12bde5167b7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Persona validada correctamente"
+                    },
+                    "404": {
+                        "description": "Persona no encontrada"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ContactoSolicitado": {
+                "title": "Contacto Solicitado",
+                "description": "Representa una solicitud de contacto entre una empresa y una persona",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "empresa_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "persona_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "estado": {
+                        "type": "string",
+                        "example": "pendiente"
+                    },
+                    "notas_admin": {
+                        "type": "string",
+                        "example": "Empresa interesada en contactar al talento"
+                    },
+                    "fecha_contacto": {
+                        "type": "string",
+                        "example": "2026-05-31"
+                    },
+                    "fecha_entrevista": {
+                        "type": "string",
+                        "example": "2026-06-03"
+                    },
+                    "fecha_resultado": {
+                        "type": "string",
+                        "example": "2026-06-10"
+                    }
+                },
+                "type": "object"
+            },
+            "Empresa": {
+                "title": "Empresa",
+                "description": "Representa a una empresa registrada en ProviEmplea",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nombre_empresa": {
+                        "type": "string",
+                        "example": "TechCorp SpA"
+                    },
+                    "rut_empresa": {
+                        "type": "string",
+                        "example": "76123456-7"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "rrhh@techcorp.cl"
+                    },
+                    "tipo_empresa": {
+                        "type": "string",
+                        "example": "contratacion-directa"
+                    },
+                    "rubro": {
+                        "type": "string",
+                        "example": "Tecnología"
+                    },
+                    "beneficios": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Seguro complementario",
+                            "Trabajo remoto"
+                        ]
+                    },
+                    "contacto_nombre": {
+                        "type": "string",
+                        "example": "Ana López"
+                    },
+                    "contacto_email": {
+                        "type": "string",
+                        "example": "ana@techcorp.cl"
+                    },
+                    "validado": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "activo": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "Persona": {
+                "title": "Persona",
+                "description": "Representa a una persona registrada en ProviEmplea",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "talento@ejemplo.cl"
+                    },
+                    "telefono": {
+                        "type": "string",
+                        "example": "+56912345678"
+                    },
+                    "codigo_talento": {
+                        "type": "string",
+                        "example": "PROV001"
+                    },
+                    "nivel_educacional": {
+                        "type": "string",
+                        "example": "Universitaria"
+                    },
+                    "titulo_carrera": {
+                        "type": "string",
+                        "example": "Ingeniería Informática"
+                    },
+                    "anio_egreso": {
+                        "type": "integer",
+                        "example": 2024
+                    },
+                    "anios_experiencia": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "competencias": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "PHP",
+                            "Laravel"
+                        ]
+                    },
+                    "areas_experiencia": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Backend"
+                        ]
+                    },
+                    "rango_renta": {
+                        "type": "string",
+                        "example": "800000"
+                    },
+                    "tipo_jornada": {
+                        "type": "string",
+                        "example": "Completa"
+                    },
+                    "modalidad": {
+                        "type": "string",
+                        "example": "Híbrida"
+                    },
+                    "persona_discapacidad": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "validado": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "activo": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Administración",
+            "description": "Administración"
+        },
+        {
+            "name": "Empresas",
+            "description": "Empresas"
+        },
+        {
+            "name": "Health",
+            "description": "Health"
+        },
+        {
+            "name": "Personas",
+            "description": "Personas"
+        }
+    ]
+}
